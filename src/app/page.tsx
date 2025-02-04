@@ -1,120 +1,78 @@
-import "./App.css";
+"use client";
 
-function App() {
-  const [cards, setCards] = useState<Card[]>([]);
-  const [turns, setTurns] = useState<number>(0);
-  const [firstChoice, setFirstChoice] = useState<Card | null>(null);
-  const [secondChoice, setSecondChoice] = useState<Card | null>(null);
-  const [disabled, setDisabled] = useState<boolean>(false);
-  const [startTime, setStartTime] = useState<number | null>(null);
-  const [endTime, setEndTime] = useState<number | null>(null);
-  const [passedTime, setPassedTime] = useState<number>(0);
-  const [score, setScore] = useState<number | null>(null);
-  const [showModal, setShowModal] = useState<boolean>(false);
-  const handleCloseModal = () => setShowModal(false);
-  const handleShowModal = () => setShowModal(true);
-  const [highScores, setHighScores] = useState<HighScore[]>([]);
-  const [inputValue, setInputValue] = useState<string>("");
-  const [showStartModal, setShowStartModal] = useState<boolean>(false);
-  const handleCloseStartModal = () => setShowStartModal(false);
-  const handleShowStartModal = () => setShowStartModal(true);
-  const [showTutorialModal, setShowTutorialModal] = useState<boolean>(false);
-  const handleCloseTutorialModal = () => setShowTutorialModal(false);
-  const handleShowTutorialModal = () => setShowTutorialModal(true);
-  const [difficulty, setDifficulty] = useState<string>("medium");
+import { useState } from "react";
+import SingleCard from "./_components/SingleCard";
+import Layout from "./Layout"
 
-  interface Card {
-    name: string;
-    src: string;
-    match: boolean;
-    id: number;
-  }
+const initialCards = [
+  { id: 1, value: "🍎", isFlipped: false },
+  { id: 2, value: "🍎", isFlipped: false },
+  { id: 3, value: "🍌", isFlipped: false },
+  { id: 4, value: "🍌", isFlipped: false },
+  { id: 5, value: "🍇", isFlipped: false },
+  { id: 6, value: "🍇", isFlipped: false },
+  { id: 7, value: "🍉", isFlipped: false },
+  { id: 8, value: "🍉", isFlipped: false },
+  { id: 9, value: "🥝", isFlipped: false },
+  { id: 10, value: "🥝", isFlipped: false },
+  { id: 11, value: "🍍", isFlipped: false },
+  { id: 12, value: "🍍", isFlipped: false },
+];
 
-  interface HighScore {
-    id: string;
-    player: string;
-    score: number;
-  }
+const Page: React.FC = () => {
+  const [cards, setCards] = useState(initialCards);
+  const [flippedCards, setFlippedCards] = useState<number[]>([]);
+  const [score, setScore] = useState(0);
+  const [gameName, setGameName] = useState("");
 
-  const easyCards: Card[] = [
-    { name: "Card1", src: Card1, match: false, id: 0 },
-    { name: "Card2", src: Card2, match: false, id: 1 },
-    { name: "Card3", src: Card3, match: false, id: 2 },
-    { name: "Card5", src: Card5, match: false, id: 3 },
-    { name: "Card6", src: Card6, match: false, id: 4 },
-    { name: "Card8", src: Card8, match: false, id: 5 },
-  ];
+  const handleCardClick = (id: number) => {
+    if (flippedCards.length === 2) return;
 
-  const mediumCards: Card[] = [
-    { name: "Card1", src: Card1, match: false, id: 0 },
-    { name: "Card2", src: Card2, match: false, id: 1 },
-    { name: "Card3", src: Card3, match: false, id: 2 },
-    { name: "Card4", src: Card4, match: false, id: 3 },
-    { name: "Card5", src: Card5, match: false, id: 4 },
-    { name: "Card6", src: Card6, match: false, id: 5 },
-    { name: "Card7", src: Card7, match: false, id: 6 },
-    { name: "Card8", src: Card8, match: false, id: 7 },
-  ];
+    const updatedCards = cards.map((card) =>
+      card.id === id ? { ...card, isFlipped: true } : card
+    );
+    setCards(updatedCards);
+    setFlippedCards([...flippedCards, id]);
 
-  const hardCards: Card[] = [
-    { name: "Card1", src: Card1, match: false, id: 0 },
-    { name: "Card2", src: Card2, match: false, id: 1 },
-    { name: "Card3", src: Card3, match: false, id: 2 },
-    { name: "Card4", src: Card4, match: false, id: 3 },
-    { name: "Card5", src: Card5, match: false, id: 4 },
-    { name: "Card6", src: Card6, match: false, id: 5 },
-    { name: "Card7", src: Card7, match: false, id: 6 },
-    { name: "Card8", src: Card8, match: false, id: 7 },
-    { name: "Card9", src: Card9, match: false, id: 8 },
-    { name: "Card10", src: Card10, match: false, id: 9 },
-  ];
+    if (flippedCards.length === 1) {
+      const firstCard = cards.find((card) => card.id === flippedCards[0]);
+      const secondCard = cards.find((card) => card.id === id);
 
-  // duplicate & shuffle cards and start a game
-  const shuffleCards = () => {
-    let cardsToUse: Card[];
-    if (difficulty === "easy") {
-      cardsToUse = easyCards;
-    } else if (difficulty === "medium") {
-      cardsToUse = mediumCards;
-    } else {
-      cardsToUse = hardCards;
+      if (firstCard?.value === secondCard?.value) {
+        setScore(score + 1);
+      } else {
+        setTimeout(() => {
+          setCards(
+            cards.map((card) =>
+              card.id === flippedCards[0] || card.id === id
+                ? { ...card, isFlipped: false }
+                : card
+            )
+          );
+        }, 1000);
+      }
+      setFlippedCards([]);
     }
-
-    const shuffledCards = [...cardsToUse, ...cardsToUse]
-      .sort(() => Math.random() - 0.5)
-      .map((card) => ({ ...card, id: Math.random() }));
-
-    setStartTime(Date.now());
-    setEndTime(null);
-    setPassedTime(0);
-    setFirstChoice(null);
-    setSecondChoice(null);
-    setCards(shuffledCards);
-    setTurns(0);
-    setInputValue("");
   };
 
-  useEffect(() => {
-    if (startTime && !endTime) {
-      const interval = setInterval(() => {
-        setPassedTime((prevPassedTime) => prevPassedTime + 1);
-      }, 1000);
-      return () => clearInterval(interval);
-    }
-  }, [startTime, endTime]);
+  return (
+    <Layout>
+      <div>
+        <input
+          type="text"
+          placeholder="Enter your game name"
+          value={gameName}
+          onChange={(e) => setGameName(e.target.value)}
+        />
+        <h2>Score: {score}</h2>
+        <div className="grid">
+          {cards.map((card) => (
+            <SingleCard key={card.id} card={card} onClick={() => handleCardClick(card.id)} />
+          ))}
+        </div>
+      </div>
+    </Layout>
+  );
+};
 
-  // end game
-  useEffect(() => {
-    let startingPoint: number;
-    if (difficulty === "easy") {
-      startingPoint = 6000;
-    } else if (difficulty === "medium") {
-      startingPoint = 10000;
-    } else {
-      startingPoint = 14000;
-    }
-
-    if (cards.length > 0 && cards.every((card) => card.match)) {
-      handleShowModal();
-      setEndTime(Date.now());
-      const randomValue = Math.round(Math.random
+export default Page;

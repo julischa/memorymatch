@@ -1,25 +1,19 @@
 import React from "react";
-import "../App.css";
-import CardBack from "../assets/hand.jpg";
 
-export default function SingleCard({ card, handleChoice, flipped, disabled }) {
-  const handleClick = () => {
-    if (!disabled) {
-      handleChoice(card);
-    }
-  };
+interface SingleCardProps {
+  card: { id: number; value: string; isFlipped: boolean };
+  onClick: () => void;
+}
 
+const SingleCard: React.FC<SingleCardProps> = ({ card, onClick }) => {
   return (
-    <div className="card">
-      <div className={flipped ? "flipped" : ""}>
-        <img src={card.src} className="front" alt="Card Front" />
-        <img
-          src={CardBack}
-          className="back"
-          alt="Card Back"
-          onClick={handleClick}
-        />
-      </div>
+    <div
+      className={`card ${card.isFlipped ? "flipped" : ""}`}
+      onClick={onClick}
+    >
+      {card.isFlipped ? card.value : "?"}
     </div>
   );
-}
+};
+
+export default SingleCard;
