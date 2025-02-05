@@ -1,7 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import SingleCard from "./_components/SingleCard";
-import { saveScore, fetchScores } from "./lib/firebase/firestore";
+import styles from "./page.module.css";
+
 
 const emojis = ["🍎", "🍌", "🍇", "🍉", "🥝", "🍍", "🍒", "🍑", "🍋", "🍊", "🥥", "🍓", "🫐", "🥭", "🌰", "🌽", "🥕", "🥒"];
 
@@ -68,7 +69,7 @@ const Page: React.FC = () => {
         </div>
       ) : (
         <div>
-          <h1>Mouse Card Memory Game</h1>
+          <h1>Mouse Memory</h1>
           <input
             type="text"
             placeholder="Enter your name"
