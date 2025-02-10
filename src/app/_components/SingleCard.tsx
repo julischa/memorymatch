@@ -15,16 +15,14 @@ interface SingleCardProps {
 
 const SingleCard: React.FC<SingleCardProps> = ({ card, onClick }) => {
   return (
-    <div 
-      className={`$"card" ${card.isFlipped ? "flipped" : ""}`} 
-      onClick={onClick}
-    >
+    <div className={`card ${card.isFlipped ? "flipped" : ""}`} onClick={onClick}>
       <div className="cardInner">
         <div className="cardFront">
-          <img src="/images/back.png" alt="Card Back" className="cardImage" />
-        </div>
-        <div className="cardBack">
-          {card.isFlipped && <img src={card.value} alt="Memory Card" className="cardImage" />}
+          {!card.isFlipped ? (
+            <img src="/images/back.png" alt="Card Back" className="cardImage" />
+          ) : (
+            <img src={card.value} alt="Memory Card" className="cardImage" />
+          )}
         </div>
       </div>
     </div>

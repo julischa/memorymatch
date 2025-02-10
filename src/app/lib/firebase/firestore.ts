@@ -24,3 +24,5 @@ export const fetchScores = async () => {
   const querySnapshot = await getDocs(q);
   return querySnapshot.docs.map((doc) => doc.data());
 };
+
+export { db };

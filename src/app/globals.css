@@ -1,10 +1,37 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: "HankenGrotesk";
+        src: url("/fonts/HankenGrotesk-VariableFont_wght.ttf") format("ttf");
+        font-weight: normal;
+        font-style: normal;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #f2f2f2;
+    background:
+            radial-gradient(73% 101% at 95.54% 95.05%,
+                rgba(255, 156, 65, 0.78) 0%,
+                rgba(255, 168, 88, 0) 100%),
+            linear-gradient(197deg,
+                rgba(255, 240, 164, 1) 0%,
+                rgba(255, 240, 164, 0) 100%),
+            radial-gradient(59% 74% at 10% -10%,
+                rgba(49, 132, 255, 0.8) 0%,
+                rgba(56, 75, 246, 0.21) 52%,
+                rgba(62, 246, 246, 0) 100%),
+            linear-gradient(143deg,
+                rgba(62, 158, 246, 1) 0%,
+                rgba(238, 43, 183, 0.33) 30%,
+                rgba(246, 62, 106, 0) 56%),
+            linear-gradient(288deg,
+                rgba(217, 155, 255, 1) 33%,
+                rgba(217, 170, 221, 0) 97%);
+}
+
+@font-face {
+    font-family: "HankenGrotesk";
+    src: url("/fonts/HankenGrotesk-VariableFont_wght.ttf") format("ttf");
+    font-weight: normal;
+    font-style: normal;
 }
 
 .grid {
@@ -43,16 +70,17 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(10px);
+    font-family: "Hanken", sans-serif;
 }
 
 .main-content {
-    background: white;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.2) 100%);
+    box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0);
+    transition: 0.4s ease height, 0.4s ease padding, 0.2s border-radius, 0.6s ease box-shadow;
     padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 40px;
     text-align: center;
+    font-family: "Hanken", sans-serif !important;
 }
 
 .landing-content input {
@@ -68,14 +96,19 @@ body {
     display: flex;
     justify-content: center;
     gap: 10px;
+    margin-top: 10px;
+}
+
+.start-button {
+    gap: 10px;
+    margin-top: 10px;
 }
 
 .main-buttons button {
-    background: red;
-    color: white;
+    color: black;
     border: none;
     padding: 12px 24px;
-    border-radius: 50px;
+    border-radius: 12px;
     font-size: 16px;
     cursor: pointer;
     transition: 0.3s ease, transform 0.2s ease;
@@ -83,12 +116,18 @@ body {
 }
 
 .main-buttons button:hover {
-    background: #0056b3;
+    background: white;
     transform: scale(1.05);
 }
 
 .main-buttons button:active {
-    background: #0056b3;
+    background: white;
+    transform: scale(1.05);
+}
+
+.main-buttons button:focus {
+    background: black;
+    color: white;
     transform: scale(1.05);
 }
 
@@ -120,7 +159,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
 .cardBack {

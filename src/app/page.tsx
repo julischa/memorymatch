@@ -28,7 +28,7 @@ const Page: React.FC = () => {
   const [score, setScore] = useState(0);
   const [gameName, setGameName] = useState("");
   const [hasStarted, setHasStarted] = useState(false);
-  const [isClient, setIsClient] = useState(true);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
@@ -41,7 +41,7 @@ const Page: React.FC = () => {
   }, [difficulty, isClient]);
 
   useEffect(() => {
-    if (cards.length > 0 && cards.every(card => card.isMatched)) {
+    if (cards.length > 0 && cards.every((card) => card.isMatched)) {
       import("canvas-confetti").then((module) => {
         const confetti = module.default;
         confetti();
@@ -64,36 +64,38 @@ const Page: React.FC = () => {
   };
 
   const handleCardClick = (id: number) => {
-    if (flippedCards.length === 2) return;
+    if (flippedCards.length === 2 || cards.find((card) => card.id === id)?.isFlipped) return;
 
     const updatedCards = cards.map((card) =>
       card.id === id ? { ...card, isFlipped: true } : card
     );
+
     setCards(updatedCards);
-    setFlippedCards([...flippedCards, id]);
+    const newFlipped = [...flippedCards, id];
 
-    if (flippedCards.length === 1) {
-      const firstCard = cards.find((card) => card.id === flippedCards[0]);
-      const secondCard = cards.find((card) => card.id === id);
+    if (newFlipped.length === 2) {
+      setTimeout(() => {
+        setCards((prevCards) => {
+          const [firstId, secondId] = newFlipped;
+          const firstCard = prevCards.find((card) => card.id === firstId);
+          const secondCard = prevCards.find((card) => card.id === secondId);
 
-      if (firstCard && secondCard && firstCard.value === secondCard.value) {
-        setCards((prevCards) =>
-          prevCards.map((card) =>
-            card.value === firstCard.value ? { ...card, isMatched: true } : card
-          )
-        );
-      } else {
-        setTimeout(() => {
-          setCards((prevCards) =>
-            prevCards.map((card) =>
-              card.id === flippedCards[0] || card.id === id
-                ? { ...card, isFlipped: false }
-                : card
-            )
-          );
-        }, 1000);
-      }
-      setFlippedCards([]);
+          if (firstCard && secondCard && firstCard.value === secondCard.value) {
+            setScore((prevScore) => prevScore + 10);
+            return prevCards.map((card) =>
+              card.value === firstCard.value ? { ...card, isMatched: true } : card
+            );
+          } else {
+            return prevCards.map((card) =>
+              card.id === firstId || card.id === secondId ? { ...card, isFlipped: false } : card
+            );
+          }
+        });
+
+        setFlippedCards([]);
+      }, 1000);
+    } else {
+      setFlippedCards(newFlipped);
     }
   };
 
@@ -112,16 +114,33 @@ const Page: React.FC = () => {
               onChange={(e) => setGameName(e.target.value)}
             />
             <div className="main-buttons">
-              <button onClick={() => setDifficulty("easy")}>Easy</button>
-              <button onClick={() => setDifficulty("medium")}>Medium</button>
-              <button onClick={() => setDifficulty("hard")}>Hard</button>
+              <button
+                className={difficulty === "easy" ? "selected" : ""}
+                onClick={() => setDifficulty("easy")}
+              >
+                Easy
+              </button>
+              <button
+                className={difficulty === "medium" ? "selected" : ""}
+                onClick={() => setDifficulty("medium")}
+              >
+                Medium
+              </button>
+              <button
+                className={difficulty === "hard" ? "selected" : ""}
+                onClick={() => setDifficulty("hard")}
+              >
+                Hard
+              </button>
             </div>
-            <button onClick={handleStartGame}>Start Game</button>
+            <button className="start-button" onClick={handleStartGame}>
+              Start Game
+            </button>
           </div>
         </div>
       ) : (
         <div className="game-container">
-          <h2>Welcome, {gameName}!</h2>
+          <h2>Let's go, {gameName}!</h2>
           <h3>Score: {score}</h3>
           <button onClick={handleNewGame}>New Game</button>
           <div className={`grid ${difficulty ? difficulty : ""}`}>
