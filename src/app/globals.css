@@ -11,7 +11,7 @@ body {
 
 @font-face {
     font-family: 'Bristol';
-    src: url('/fonts/bristol.otf') format('truetype');
+    src: url('/fonts/bristol.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
