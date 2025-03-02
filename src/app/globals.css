@@ -1,138 +1,133 @@
 body {
-    font-family: "HankenGrotesk";
-        src: url("/fonts/HankenGrotesk-VariableFont_wght.ttf") format("ttf");
-        font-weight: normal;
-        font-style: normal;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background:
-            radial-gradient(73% 101% at 95.54% 95.05%,
-                rgba(255, 156, 65, 0.78) 0%,
-                rgba(255, 168, 88, 0) 100%),
-            linear-gradient(197deg,
-                rgba(255, 240, 164, 1) 0%,
-                rgba(255, 240, 164, 0) 100%),
-            radial-gradient(59% 74% at 10% -10%,
-                rgba(49, 132, 255, 0.8) 0%,
-                rgba(56, 75, 246, 0.21) 52%,
-                rgba(62, 246, 246, 0) 100%),
-            linear-gradient(143deg,
-                rgba(62, 158, 246, 1) 0%,
-                rgba(238, 43, 183, 0.33) 30%,
-                rgba(246, 62, 106, 0) 56%),
-            linear-gradient(288deg,
-                rgba(217, 155, 255, 1) 33%,
-                rgba(217, 170, 221, 0) 97%);
+    background: #0f2d2c;
+    color: white;
+    font-family: 'Poppins', sans-serif;
 }
 
 @font-face {
-    font-family: "HankenGrotesk";
-    src: url("/fonts/HankenGrotesk-VariableFont_wght.ttf") format("ttf");
+    font-family: 'Bristol';
+    src: url('/fonts/bristol.otf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
-.grid {
+@font-face {
+    font-family: 'Poppins';
+    src: url('/fonts/Poppins-Light.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.title {
+    font-family: 'Bristol', sans-serif;
+    font-size: 6rem;
+    text-align: center;
+    line-height: 0.7;
+    color: #eff1c9;
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    text-align: center;
+        font-family: 'Poppins', sans-serif;
+        color: #eff1c9;
+   
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: 'Bristol', sans-serif;
+    margin-bottom: 10px;
+}
+
+h3 {
+    font-size: 1rem;
+    font-weight: lighter;
+    margin-bottom: 15px;
+}
+
+.new-game-button {
+    background-color: #eff1c9;
+    color: black;
+    font-size: 1rem;
+    padding: 10px 50px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 30px;
+}
+
+.new-game-button:hover {
+    background-color: black;
+    color: white;
+    transform: scale(1.1);
+}
+
+.grid {
+    display: grid;
+    gap: 15px;
     justify-content: center;
     align-items: center;
     margin-top: 20px;
 }
 
 .easy {
-    width: 400px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+        background-color: rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        border-radius: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        margin-top: 20px;
 }
 
 .medium {
-    width: 600px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(6, 1fr);
+    background-color: rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        border-radius: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        margin-top: 20px;
 }
 
 .hard {
-    width: 800px;
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(9, 1fr);
+    background-color: rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        border-radius: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        margin-top: 20px;
 }
 
-.main {
-    position: fixed;
-    top: 10;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: "Hanken", sans-serif;
-}
+@media (max-width: 600px) {
 
-.main-content {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.2) 100%);
-    box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0);
-    transition: 0.4s ease height, 0.4s ease padding, 0.2s border-radius, 0.6s ease box-shadow;
-    padding: 30px;
-    border-radius: 40px;
-    text-align: center;
-    font-family: "Hanken", sans-serif !important;
-}
+    .easy,
+    .medium {
+        grid-template-columns: repeat(3, 1fr);
+    }
 
-.landing-content input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 4px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 16px;
-}
-
-.main-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.start-button {
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.main-buttons button {
-    color: black;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 12px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s ease, transform 0.2s ease;
-    font-weight: bold;
-}
-
-.main-buttons button:hover {
-    background: white;
-    transform: scale(1.05);
-}
-
-.main-buttons button:active {
-    background: white;
-    transform: scale(1.05);
-}
-
-.main-buttons button:focus {
-    background: black;
-    color: white;
-    transform: scale(1.05);
+    .hard {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
 
 .card {
-    width: 80px;
+    width: 100px;
     height: 100px;
     cursor: pointer;
     perspective: 1000px;
@@ -167,4 +162,370 @@ body {
 
 .cardImage {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.input-name {
+    width: 80%;
+    max-width: 300px;
+    padding: 10px;
+    font-size: 1.5rem;
+    text-align: center;
+    border: none;
+    border-radius: 20px;
+    background-color: #6B757A;
+    color: #eff1c9;
+    outline: none;
+}
+
+.input-name::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.button-level {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    background-color: #6B757A;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 5px;
+}
+
+.button-level:hover {
+    background-color: #5a6368;
+}
+
+.button-go {
+    width: 80px;
+    height: 80px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 50%;
+    background-color: #eff1c9;
+    color: black;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s;
+}
+
+.button-go:hover {
+    transform: scale(1.1);
+    background-color: white;
+}
+
+.main {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-content {
+    padding: 30px;
+    border-radius: 40px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    color: #eff1c9;
+}
+
+.main-content input {
+    font-family: 'Poppins', sans-serif;
+    width: 230px;
+    padding: 6px;
+    margin-bottom: 4px;
+    border: 1px solid;
+    border-radius: 20px;
+    font-size: 16px;
+    color: white; 
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+
+.main-buttons {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.main-buttons button {
+    color: black;
+    border: none;
+    background: #eff1c9;
+    padding: 4px 14px;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s ease, transform 0.2s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.main-buttons button:hover {
+    background: white;
+    transform: scale(1.05);
+}
+
+.main-buttons button:active {
+    background: white;
+    transform: scale(1.05);
+}
+
+.main-buttons button:focus {
+    background: black;
+    color: white;
+    transform: scale(1.05);
+}
+
+.enter-name {
+    color: #eff1c9;
+    margin-bottom: 30px !important;
+}
+
+.start-button {
+    background-color: #eff1c9;
+    color: black;
+    font-size: 24px;
+    font-family: 'Bristol', sans-serif;
+    width: 100px;
+    height: 100px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.2s ease-in-out;
+    z-index: 10;
+}
+
+.start-button:hover {
+    background-color: white;
+    color: #0f2d2c;
+    transform: scale(1.1);
+}
+
+.go {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.leaderboard-container {
+    width: 100%;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #0d2726;
+    color: #eff1c9;
+    padding: 10px 0;
+    font-family: 'Poppins', sans-serif;
+    z-index: 1000;
+    white-space: nowrap;
+}
+
+.leaderboard {
+    display: flex;
+    gap: 50px;
+    animation: scrollLeaderboard 50s linear infinite;
+}
+
+@keyframes scrollLeaderboard {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+.leaderboard-item {
+    font-size: 16px;
+    padding: 0 20px;
+    flex-shrink: 0;
+    min-width: max-content;
+}
+
+@media (max-width: 600px) {
+    .title {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .easy,
+    .medium {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .hard {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .card {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+@media (max-width: 600px) {
+    .leaderboard-item {
+        font-size: 14px;
+    }
+}
+@media (max-width: 600px) {
+    .game-container h3 {
+        margin-bottom: 1px;
+        margin-top: 1px;
+    }
+}
+
+@keyframes goButtonZoom {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+        background-color: white;
+    }
+
+    50% {
+        transform: scale(20);
+        opacity: 1;
+        background-color: white;
+    }
+
+    100% {
+        transform: scale(50);
+        opacity: 0;
+        background-color: white;
+    }
+}
+
+.start-button.zoom {
+    animation: goButtonZoom 2.8s linear forwards;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: white;
+}
+
+@keyframes shakeRotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(-5deg);
+    }
+
+    50% {
+        transform: rotate(5deg);
+    }
+
+    75% {
+        transform: rotate(-5deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.shake {
+    animation: shakeRotate 0.2s ease-in-out;
+}
+
+@keyframes runMouse {
+    0% {
+        left: -20%;
+        bottom: 10%;
+        opacity: 1;
+    }
+
+    20% {
+        bottom: 12%;
+    }
+
+    40% {
+        bottom: 8%;
+    }
+
+    60% {
+        bottom: 12%;
+    }
+
+    80% {
+        bottom: 10%;
+        opacity: 1;
+    }
+
+    100% {
+        left: 120%;
+        bottom: 10%;
+        opacity: 0;
+    }
+}
+
+.running-mouse {
+    position: fixed;
+    bottom: 25%;
+    width: 80px;
+    height: auto;
+    animation: runMouse 8s linear forwards, runBounce 0.2s infinite alternate;
+    z-index: 1;
+}
+
+@keyframes runBounce {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-5px);
+    }
+}
+
+
+@media (max-width: 1024px) {
+    .running-mouse {
+        width: 80px;
+        bottom: 30%;
+        animation: runMouse 6s linear forwards, runBounce 0.15s infinite alternate;
+    }
+}
+
+@media (max-width: 768px) {
+    .running-mouse {
+        width: 80px;
+        bottom: 30%;
+        animation: runMouse 5s linear forwards, runBounce 0.15s infinite alternate;
+    }
+}
+
+@media (max-width: 480px) {
+    .running-mouse {
+        width: 80px;
+        bottom: 30%;
+        animation: runMouse 4s linear forwards, runBounce 0.1s infinite alternate;
+    }
 }

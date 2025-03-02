@@ -34,10 +34,3 @@
   width: 100%;
 }
 
-@font-face {
-  font-family: "HankenGrotesk";
-  src: url("/fonts/HankenGrotesk-VariableFont_wght.ttf") format("ttf");
-  font-weight: normal;
-  font-style: normal;
-}
-
