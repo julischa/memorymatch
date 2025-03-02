@@ -1,17 +1,10 @@
 {
   "headers": [
     {
-      "source": "/fonts/bristol.otf",
+      "source": "/fonts/:path*",
       "headers": [
         { "key": "Access-Control-Allow-Origin", "value": "*" },
-        { "key": "Content-Type", "value": "font/otf" }
-      ]
-    },
-    {
-      "source": "/fonts/Poppins-Light.ttf",
-      "headers": [
-        { "key": "Access-Control-Allow-Origin", "value": "*" },
-        { "key": "Content-Type", "value": "font/ttf" }
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
     }
   ]
