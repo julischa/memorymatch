@@ -10,29 +10,27 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
-export const db = getFirestore(app);
+const firebaseApp = getApps().length ? getApp() : initializeApp(firebaseConfig);
+const db = getFirestore(firebaseApp);
 
-export const saveScore = async (id: string, name: string, score: number, difficulty: string) => {
-  try {
-    await setDoc(doc(db, "scores", id), {
-      name,
-      score,
-      difficulty,
-      timestamp: new Date(),
-    });
-  } catch (error) {
-    console.error("Error saving score:", error);
-  }
+
+const leaderboardRef = collection(db, "leaderboard");
+
+
+const saveScore = async (playerName: string, score: number) => {
+  const newScoreRef = doc(leaderboardRef);
+  await setDoc(newScoreRef, {
+    playerName,
+    score,
+    timestamp: new Date(),
+  });
 };
 
-export const fetchScores = async () => {
-  const q = query(
-    collection(db, "scores"),
-    orderBy("score", "desc"),
-    limit(10)
-  );
 
+const getTopScores = async () => {
+  const q = query(leaderboardRef, orderBy("score", "desc"), limit(10));
   const querySnapshot = await getDocs(q);
-  return querySnapshot.docs.map((doc) => doc.data());
+  return querySnapshot.docs.map(doc => doc.data());
 };
+
+export { firebaseApp, db, saveScore, getTopScores };

@@ -1,0 +1,18 @@
+{
+  "headers": [
+    {
+      "source": "/fonts/bristol.otf",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Content-Type", "value": "font/otf" }
+      ]
+    },
+    {
+      "source": "/fonts/Poppins-Light.ttf",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Content-Type", "value": "font/ttf" }
+      ]
+    }
+  ]
+}
