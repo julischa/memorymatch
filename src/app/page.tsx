@@ -1,13 +1,13 @@
 "use client";
 import { useState, useEffect } from "react";
 import SingleCard from "./_components/SingleCard";
-import { db } from "./lib/firebase/firebaseConfig";
+import { db } from "./lib/firebase/firestore";
 import { collection, addDoc, query, orderBy, onSnapshot } from "firebase/firestore";
 
 const difficulties = {
   easy: 6,
   medium: 12,
-  hard: 18,
+  hard: 16,
 };
 
 const generateCards = (pairCount: number) => {
