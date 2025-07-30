@@ -3,7 +3,7 @@
 A flip-card memory game built with Next.js, TypeScript & Firebase. Match pairs, beat the clock, and climb the leaderboard!  
 Designed with a playful mouse mascot and celebratory confetti, it’s as kitsch as it is challenging.
 
----
+--
 
 ## ✨ Features
 
@@ -16,13 +16,13 @@ Designed with a playful mouse mascot and celebratory confetti, it’s as kitsch 
 - "New Game" button for instant replay
 - And… can you catch the mouse? 🐁
 
----
+--
 
 ## 🚀 Demo
 
 Check out the live version here:  
 👉 [https://memorymatch-delta.vercel.app/](https://memorymatch-delta.vercel.app/)
 
----
+--
 
 ## 🖼️ Preview
