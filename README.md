@@ -19,6 +19,3 @@ Designed with playful mouse mascots and celebratory confetti, it’s as kitsch a
 
 Check out the live version here:  
 👉 [https://memorymatch-delta.vercel.app/](https://memorymatch-delta.vercel.app/)
-
-
-## Preview
